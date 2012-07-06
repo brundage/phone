@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name    = 'phone'
-  s.version = '1.0'
+  s.version = '1.1.1'
   s.date    = '2011-04-05'
   
   s.summary = "Phone number parsing, validation and formatting"
