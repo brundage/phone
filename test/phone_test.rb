@@ -1,6 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
 class PhoneTest < Test::Unit::TestCase
+
+  def test_blank_number_initialize
+    assert_nothing_raised do
+      Phoner::Phone.new
+    end
+  end
   
   def test_number_without_country_code_initialize    
     Phoner::Phone.default_country_code = nil
