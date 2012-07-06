@@ -24,8 +24,10 @@ Gem::Specification.new do |s|
       lib/phone.rb 
       lib/country.rb 
       lib/support.rb 
+      lib/phone_validator.rb 
       test/extension_test.rb 
       test/phone_test.rb 
+      test/phone_validator_test.rb 
       test/test_helper.rb 
       test/countries/au_test.rb 
       test/countries/ba_test.rb 
@@ -48,6 +50,7 @@ Gem::Specification.new do |s|
     s.test_files = %w(
       test/extension_test.rb 
       test/phone_test.rb 
+      test/phone_validator_test.rb 
       test/test_helper.rb 
       test/countries/au_test.rb 
       test/countries/ba_test.rb 

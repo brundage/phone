@@ -36,6 +36,7 @@ module Phoner
     }
 
     def initialize(*hash_or_args)    
+      return self if hash_or_args.empty?
       if hash_or_args.first.is_a?(Hash)
         hash_or_args = hash_or_args.first
         keys = {:number => :number, :area_code => :area_code, :country_code => :country_code, :extension => :extension}
@@ -57,6 +58,7 @@ module Phoner
     # the format of the string is detect automatically (from FORMATS)
     def self.parse(string, options={})       
       if string.present?    
+        string = string.to_s unless string.is_a?(String)
         Country.load
         extension = extract_extension(string)
         string = normalize(string)
@@ -164,7 +166,7 @@ module Phoner
     #TODO: refactor things so this doesn't change string as a side effect
     #
     def self.extract_extension(string)
-      return nil if string.nil?
+      return if string.nil?
       if string.sub! /[ ]*(ext|ex|x|xt|#|:)+[^0-9]*\(*([-0-9]{1,})\)*#?$/i, ''
         extension = $2
         return extension
@@ -189,11 +191,13 @@ module Phoner
 
     # first n characters of :number
     def number1
+      return if number.nil?
       number[0...self.class.n1_length]
     end
 
     # everything left from number after the first n characters (see number1)
     def number2
+      return if number.nil?
       n2_length = number.size - self.class.n1_length
       number[-n2_length, n2_length]
     end
@@ -255,4 +259,8 @@ module Phoner
       return result
     end
   end  
+end
+
+if defined?(Rails) && Rails::VERSION && Rails::VERSION::MAJOR >= 3
+  require 'phone_validator'
 end
